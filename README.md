@@ -1,6 +1,5 @@
-# Stepped-Multi-Volume Stellarator Geometry (G1)
+# Stepped-Multi-Volume Stellarator Geometry
 **Project:** Sovereign Factory
-**Node:** Delta / Alpha
 
 <img width="962" height="685" alt="image" src="https://github.com/user-attachments/assets/b5ed8a95-a1b4-4e4a-9671-44c7ff022394" />
 
