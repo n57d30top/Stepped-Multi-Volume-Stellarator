@@ -1,6 +1,12 @@
 # Stepped-Multi-Volume Stellarator Geometry (G1)
 **Project:** Sovereign Factory
 **Node:** Delta / Alpha
+
+<img width="962" height="685" alt="image" src="https://github.com/user-attachments/assets/b5ed8a95-a1b4-4e4a-9671-44c7ff022394" />
+
+<img width="928" height="394" alt="image" src="https://github.com/user-attachments/assets/2557585d-1817-4f8f-a96f-8af704841f4d" />
+
+
 ## Abstract
 This repository contains a mathematically proven, fully convergent 3D magnetic confinement geometry for an asymmetric stellarator. 
 This geometry was autonomously generated and verified by our local AI architecture (Sovereign Factory). It resolves the singular currents and boundary interface constraints that typically trigger "zero-volume" failures in legacy algorithms. The architecture successfully isolates and contains a stepped-pressure plasma profile without structural degradation.
