@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sovereign Factory - Stellarator G1 Viewer</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <style>
+        body { margin: 0; background: #0a0a0a; color: white; font-family: monospace; overflow: hidden; }
+        #plot { width: 100vw; height: 100vh; }
+        .overlay { position: absolute; top: 20px; left: 20px; z-index: 10; pointer-events: none; }
+        h1 { color: #00ffcc; font-size: 24px; margin: 0 0 10px 0; text-shadow: 0 0 10px #00ffcc; }
+        p { color: #aaaaaa; margin: 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>SOVEREIGN FACTORY | NODE DELTA</h1>
+        <p>G1 Stellarator Outermost Boundary Flux Surface</p>
+        <p>Quasi-Symmetric Convergence | NFP = 5</p>
+    </div>
+    <div id="plot"></div>
+    <script>
+        // VMEC Boundary Data parsed from the G1 .input file
+        const nfp = 5;
+        const rbc = [
+            {m: 0, n: 0, val: 5.652649},
+            {m: 0, n: 1, val: 0.578},
+            {m: 0, n: 2, val: 0.000074},
+            {m: 0, n: 3, val: 0.029922},
+            {m: 1, n: 1, val: 0.070588},
+            {m: 1, n: 2, val: 0.023875}
+        ];
+        const zbs = [
+            {m: 0, n: 1, val: 0.710776},
+            {m: 0, n: 2, val: 0.132776},
+            {m: 0, n: 3, val: 0.0179532},
+            {m: 1, n: 1, val: 0.070588},
+            {m: 1, n: 2, val: -0.016235}
+        ];
+
+        // Generate 3D Toroidal Meshgrid
+        const numU = 80;  // Poloidal resolution (Theta)
+        const numV = 200; // Toroidal resolution (Phi)
+        
+        const X = [], Y = [], Z = [];
+
+        for (let i = 0; i <= numU; i++) {
+            const u = (i / numU) * 2 * Math.PI; 
+            const rowX = [], rowY = [], rowZ = [];
+            
+            for (let j = 0; j <= numV; j++) {
+                const v = (j / numV) * 2 * Math.PI; 
+                
+                // Inverse Fourier Transform for R and Z based on VMEC logic
+                let r = 0;
+                for(let k=0; k<rbc.length; k++) {
+                    r += rbc[k].val * Math.cos(rbc[k].m * u - rbc[k].n * nfp * v);
+                }
+                
+                let z = 0;
+                for(let k=0; k<zbs.length; k++) {
+                    z += zbs[k].val * Math.sin(zbs[k].m * u - zbs[k].n * nfp * v);
+                }
+
+                // Convert Cylindrical (R, Phi, Z) to Cartesian (X, Y, Z)
+                const x = r * Math.cos(v);
+                const y = r * Math.sin(v);
+                
+                rowX.push(x);
+                rowY.push(y);
+                rowZ.push(z);
+            }
+            X.push(rowX);
+            Y.push(rowY);
+            Z.push(rowZ);
+        }
+
+        const data = [{
+            type: 'surface',
+            x: X, y: Y, z: Z,
+            colorscale: 'Plasma',
+            showscale: false,
+            lighting: { ambient: 0.7, diffuse: 0.8, specular: 1.0, roughness: 0.5 }
+        }];
+
+        const layout = {
+            paper_bgcolor: '#0a0a0a',
+            margin: { t: 0, l: 0, r: 0, b: 0 },
+            scene: {
+                xaxis: { showbackground: false, visible: false },
+                yaxis: { showbackground: false, visible: false },
+                zaxis: { showbackground: false, visible: false },
+                aspectmode: 'data',
+                camera: { eye: {x: 1.5, y: 1.5, z: 1.2} }
+            }
+        };
+
+        Plotly.newPlot('plot', data, layout, {responsive: true});
+    </script>
+</body>
+</html>
