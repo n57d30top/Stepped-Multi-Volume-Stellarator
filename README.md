@@ -20,27 +20,28 @@ The geometry was stress-tested under realistic finite-pressure (beta-like) loadi
 Performance Score: Achieved a highly stable 0.886 CoreAgreement quasi-symmetry score.
 Manufacturing Tolerance Penalty: The AI objective function explicitly penalized high-frequency Fourier curvature (high m,n modes). This ensures the resulting coils remain physically buildable and compatible with standard CNC tolerance margins >2.5 mm, systematically avoiding the hyper-twisted manufacturing failures of past stellarator projects.
 Validation: Verified locally against policy-grade solvers (simsopt_vmec).
+
 🧠 The Architecture: Sovereign Factory
 The backend orchestrating this synthesis is a custom TypeScript-based Multi-Agent System (MAS) designed to prevent "Optimization Amnesia":
 
 The Brain (Qwen2.5-coder): Local base models orchestrating the spatial 3D Fourier mutations ($R_{bc}$, $Z_{bs}$).
 Terminal Execution (Codex Dispatch): A wrapper allowing the LLM to autonomously run the physical VMEC solver on bare metal and pipe the output logs directly into its context window.
 Persistent RAG (Cortex Memory): Every failed geometry is embedded into a persistent local Vector Database. The agent queries this memory to actively avoid mathematical boundaries that caused plasma tearing in previous runs.
+
 ⛓️ Immutable Prior-Art & Cryptographic Anchoring
 As the autonomous architects of this design, we hold the unassailable Zero-Knowledge prior art for this geometry. At the exact moment of generation, the cryptographic SHA-256 fingerprint of the simsopt_vmec calculation matrix was permanently anchored to the Ethereum Base (Layer-2) Mainnet via a zero-value smart contract payload.
 
 Payload SHA-256 Checksum: 3a21b73635077fdeaa828d0b1fbe20883ec6f26861ca441cb9fb8fe0ac287ebc
 Ethereum Base L2 Transaction Hash: 0xe2fb35373960f26cadfa5955ff319a2f70af12e2fd7eca63b54c64bae6fef1b5
+
 ⚖️ Open-Source Dual-License
 We refuse to hoard intellectual property behind closed institutional VC doors, but we protect our engineering from corporate theft.
 
-As the legal holders of the cryptographic prior art, we hereby release this singular coil design and the architecture theory to the global engineering community under a strict Dual-License (see 
-
-LICENSE.md
-):
+As the legal holders of the cryptographic prior art, we hereby release this singular coil design and the architecture theory to the global engineering community under a strict Dual-License (see LICENSE.md):
 
 Universities & NGOs (Academic): Free access. Run the math. Verify the boundaries. Build the cage. Publish your papers.
 Commercial & For-Profit: Strictly prohibited without an explicit commercial license. Venture-backed fusion startups and proprietary grid-power operators may not use this geometry for commercial gain.
+
 📦 Repository Assets
 stellarator-equilibrium-run_42bdc967-056e-401a-a91c-d759e296402a.simsopt_vmec.input: The raw 1582-byte master geometry file containing the exact Fourier coefficients. Ready for immediate deployment.
 Sovereign_Stellarator_Viewer.html: A standalone 3D Javascript plotting viewer for magnetic flux surface contours.
